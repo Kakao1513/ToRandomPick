@@ -24,6 +24,6 @@ public class Main {
         String gift = new String();
         gift = sc.nextLine();
         String[] winning = gift.split(" ");//공백 단위로 보상분할
-
+        //푸시확인
     }
 }
