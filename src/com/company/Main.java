@@ -9,46 +9,72 @@ class spliter{
     }
 }
 
+class Draw{
+    protected String[] members, gifts, winner;
+    private final Random rand = new Random();
+    private int[] winnerIndex;
+    Draw(String mem, String gi){
+        this.members = new String[spliter.spliting(mem).length];
+        this.gifts = new String[spliter.spliting(gi).length];
+        this.winner = new String[gifts.length];
+        this.winnerIndex = new int[gifts.length];
+        members=spliter.spliting(mem);
+        gifts=spliter.spliting(gi);
+    }
+
+
+    void winnerDraw() {
+
+        for (int i = 0; i < gifts.length; i++) { //당첨 번호 뽑기 파트
+            winnerIndex[i] = rand.nextInt(members.length);
+            for (int j = 0; j < i; j++) {
+                if (winnerIndex[i] == winnerIndex[j]) {
+                    i--;
+                }
+            }
+        }
+        for (int i = 0; i < winner.length; i++) {//맴버의 길이 만큼 반복.
+            winner[i]=members[winnerIndex[i]];
+        }
+    }
+    void showWinner(){
+        System.out.println("\n-----당첨-----");
+        for(int i = 0 ; i< winner.length; i++){
+            System.out.println(gifts[i]+":"+winner[i]);
+        }
+    }
+    void showfail(){
+        int k=0;
+        System.out.println("\n-----컽------");
+        for (String member : members) {
+            if (k > winner.length - 1) {
+                k = winner.length - 1;
+            }
+            if (!member.equals(winner[k])) {
+                System.out.println(member);
+            } else {//멤버가 같은경우
+                k++;
+            }
+        }
+    }
+
+}
 public class Main {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Random rand = new Random();
+
         System.out.println("****** To Random Pick Draw ******");
         System.out.print("Members:");
 
         String allMembers = sc.nextLine();
-        String[] member = spliter.spliting(allMembers);//공백 단위로 유저 분할
 
         System.out.print("Gifts:");
         String gift = sc.nextLine();
-        String[] winning = spliter.spliting(gift);//공백 단위로 보상분할
-
-        int[] winningIndex = new int[winning.length];//당첨번호 입력
-        for (int i = 0; i<winning.length; i++){ //당첨번호 부여파트
-            winningIndex[i] = rand.nextInt(member.length);
-            for(int j = 0; j<i;j++){//중복당첨 제거파트
-                if(winningIndex[i]==winningIndex[j]){
-                    i--;
-                }
-            }
-        }
-
-        System.out.println("");
-        System.out.println("-당첨-");
-        for(int i = 0 ; i< winning.length; i++){
-            System.out.println(winning[i]+":"+member[winningIndex[i]]);
-        }
-
-        System.out.println("");
-        System.out.println("-컽-");
-        for(int i = 0; i< member.length;){
-            for(int j = 0; j< winning.length;j++){
-                if(winningIndex[j]==i){
-                    break;
-                }
-            }
-            System.out.println(member[i++]);
-        }
+        Draw draw = new Draw(allMembers, gift);
+        draw.winnerDraw();
+        draw.showWinner();
+        draw.showfail();
     }
 }
