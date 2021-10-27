@@ -63,15 +63,15 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Random rand = new Random();
 
         System.out.println("****** To Random Pick Draw ******");
-        System.out.print("Members:");
 
+        System.out.print("Members:");
         String allMembers = sc.nextLine();
 
         System.out.print("Gifts:");
         String gift = sc.nextLine();
+
         Draw draw = new Draw(allMembers, gift);
         draw.winnerDraw();
         draw.showWinner();
