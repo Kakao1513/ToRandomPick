@@ -17,11 +17,11 @@ class Draw{
     Draw(String mem, String gi){
         this.members = new String[spliter.spliting(mem).length];
         this.gifts = new String[spliter.spliting(gi).length];
-        this.winner = new String[gifts.length];
         this.winnerIndex = new int[gifts.length];
         this.winnerGift = new String[2][members.length];//세로 2 가로 멤버 변수의 길이 만큼의 배열
         members=spliter.spliting(mem);
         gifts=spliter.spliting(gi);
+        winnerGift[0]=members;
     }
 
 
@@ -30,45 +30,35 @@ class Draw{
         for (int i = 0; i < gifts.length; i++) { //당첨 번호 뽑기 파트
             winnerIndex[i] = rand.nextInt(members.length);
             for (int j = 0; j < i; j++) {
-                if (winnerIndex[i] == winnerIndex[j]) {
+                if (winnerIndex[i] == winnerIndex[j]) {//중복 제거 파트
                     i--;
                 }
             }
         }
-        for (int i = 0; i < winner.length; i++) {//당첨자의 길이 만큼 반복.
-            winner[i]=members[winnerIndex[i]];
-        }
+
         setGifts();
     }
     private void setGifts(){
-
+        for (int i = 0; i < gifts.length; i++) {//당첨자의 길이 만큼 반복.
+                winnerGift[1][winnerIndex[i]] = gifts[i]; //당첨자와 상품 매치
+        }
         for(int i = 0, j = 0; i< members.length;i++){//members의 길이만큼 반복
-            try{
-                if(winnerIndex[j]==i){
-                    winnerGift[0][i]=members[i];
-                    winnerGift[1][i]=gifts[j++];
-                }   else{
-                    winnerGift[0][i]=members[i];
-                    winnerGift[1][i]="꽝";
-                }
-            }catch (ArrayIndexOutOfBoundsException e){
-                e.getMessage();
-                winnerGift[0][i]=members[i];
+            if(winnerGift[1][i]==null){
                 winnerGift[1][i]="꽝";
             }
         }
     }
     void showWinner(){
         System.out.println("\n-----당첨-----");
-        for(int i = 0 ; i< winner.length; i++){
-            System.out.println(winner[i]+":"+gifts[i]);
+        for(int i = 0 ; i< gifts.length; i++){
+            System.out.println(winnerGift[0][winnerIndex[i]]+":"+winnerGift[1][winnerIndex[i]]);
         }
     }
     void showfail(){
-        System.out.println("\n-----컽------");
-        for(int i = 0 ; i<members.length;i++){
+        System.out.println("\n-----꽝------");
+        for(int i = 0; i < members.length; i++){
             if(winnerGift[1][i].equals("꽝")){
-                System.out.println(members[i]);
+                System.out.println(winnerGift[0][i]);
             }
         }
     }
