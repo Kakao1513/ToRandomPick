@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="untitled104:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/untitled104_jar</output-path>
+  <artifact type="jar" name="RandomDraw:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/RandomDraw_jar</output-path>
     <root id="archive" name="untitled104.jar">
       <element id="module-output" name="untitled104" />
     </root>

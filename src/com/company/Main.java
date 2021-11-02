@@ -3,11 +3,6 @@ package com.company;
 import java.util.Random;
 import java.util.Scanner;
 
-class spliter{
-    public static String[] spliting(String a){
-        return a.split(" ");
-    }
-}
 
 public class Main {
 
@@ -16,19 +11,21 @@ public class Main {
 
         System.out.println("****** To Random Pick Draw ******");
         while(true) {
+
             System.out.print("Members:");
             String allMembers = sc.nextLine();
-
             System.out.print("Gifts:");
             String gift = sc.nextLine();
-
-            Draw draw = new Draw(allMembers, gift);
-            draw.winnerDraw();
-            draw.showSequence();
-            draw.showWinner();
-            draw.showfail();
-
-            System.out.println("continue? Stop?");
+          try {
+              Draw draw = new Draw(allMembers, gift);
+              draw.winnerDraw();
+              draw.showSequence();
+              draw.showWinner();
+              draw.showfail();
+          }catch (GiftMoreThanMemberExpcetion e){
+              System.out.println(e.getMessage());
+          }
+            System.out.println("\ncontinue? Stop?");
             System.out.println("If you want to continue, please enter the 1, otherwise enter another key.");
             System.out.print("Enter:");
             char ent = sc.next().charAt(0);

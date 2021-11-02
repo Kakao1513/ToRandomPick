@@ -2,14 +2,28 @@ package com.company;
 
 import java.util.Random;
 
+class spliter{
+    public static String[] spliting(String a){
+        return a.split(" ");
+    }
+}
+class GiftMoreThanMemberExpcetion extends Exception{
+    public GiftMoreThanMemberExpcetion(){
+        super("상품의 갯수가 사람의 수보다 많습니다.");
+    }
+}
 class Draw{
     protected String[] members, gifts, winner;
     private final Random rand = new Random();
     private String[][] winnerGift;
     private int[] winnerIndex;
-    Draw(String mem, String gi){
+
+    Draw(String mem, String gi) throws GiftMoreThanMemberExpcetion{
         this.members = new String[spliter.spliting(mem).length];
         this.gifts = new String[spliter.spliting(gi).length];
+        if(gifts.length> members.length){
+            throw new GiftMoreThanMemberExpcetion();
+        }
         this.winnerIndex = new int[gifts.length];
         this.winnerGift = new String[2][members.length];//세로 2 가로 멤버 변수의 길이 만큼의 배열
         members=spliter.spliting(mem);
