@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("****** To Random Pick Draw ******");
+        System.out.println("****** 상품 분배기 ******");
         while(true) {
 
             System.out.print("Members:");
