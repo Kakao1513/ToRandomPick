@@ -1,5 +1,6 @@
 package com.company;
 
+import java.math.BigDecimal;
 import java.util.Random;
 
 class spliter{
@@ -10,6 +11,11 @@ class spliter{
 class GiftMoreThanMemberExpcetion extends Exception{
     public GiftMoreThanMemberExpcetion(){
         super("상품의 갯수가 사람의 수보다 많습니다.");
+    }
+}
+class OverPercentageExpcetion extends Exception{
+    public OverPercentageExpcetion(){
+        super("확률의 최댓값을 초과하였습니다.");
     }
 }
 class Draw{
@@ -30,7 +36,20 @@ class Draw{
         gifts=spliter.spliting(gi);
         winnerGift[0]=members;
     }
+    public static boolean percentage(BigDecimal a){
+        int firstScale, DecimalScale;
+        firstScale=a.precision()-a.scale();
+        DecimalScale=a.scale();
+        try{
+            if(firstScale>2){
+                throw new OverPercentageExpcetion();
+            }
+        }catch (OverPercentageExpcetion e){
+            System.out.println(e.getMessage());
+        }
 
+        return true;
+    }
 
     void winnerDraw() {
 

@@ -2,7 +2,7 @@
   <artifact type="jar" name="RandomDraw:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/RandomDraw_jar</output-path>
     <root id="archive" name="untitled104.jar">
-      <element id="module-output" name="untitled104" />
+      <element id="module-output" name="JavaStudy" />
     </root>
   </artifact>
 </component>
